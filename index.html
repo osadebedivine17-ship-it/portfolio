@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Divine Osadebe — Frontend Developer</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#efefef; /* light grey */
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#556bff;
+      --text:#111827;
+      --glass: rgba(255,255,255,0.6);
+      --radius:14px;
+    }
+    [data-theme='dark']{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9ca3af;
+      --accent:#7c9bff;
+      --text:#e6eef8;
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:var(--text);background:linear-gradient(180deg,var(--bg),#dcdcdc);}
+
+    /* Layout */
+    .container{max-width:1100px;margin:28px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#2fb4ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+    .brand h1{margin:0;font-size:18px}
+    nav{display:flex;gap:6px;flex-wrap:wrap}
+    nav a{padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--text);font-weight:600}
+    nav a.active, nav a:hover{background:var(--glass);backdrop-filter:blur(6px)}
+
+    .controls{display:flex;gap:10px;align-items:center}
+    .btn{padding:10px 14px;border-radius:12px;border:0;background:var(--accent);color:white;font-weight:700;cursor:pointer}
+    .outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+
+    /* Main layout cards */
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:22px}
+    .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:0 6px 28px rgba(15,23,42,0.06)}
+
+    /* Hero */
+    .hero{display:flex;gap:18px;align-items:center}
+    .hero .intro{flex:1}
+    .hero h2{margin:0 0 8px 0;font-size:22px}
+    .hero p{margin:0;color:var(--muted)}
+    .socials{display:flex;gap:10px;margin-top:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;text-decoration:none;background:var(--glass);}
+
+    /* About */
+    .about{display:flex;gap:14px;align-items:center}
+    .about .photo{width:160px;height:160px;border-radius:14px;overflow:hidden;flex-shrink:0;background:linear-gradient(180deg,rgba(0,0,0,0.06),rgba(0,0,0,0.02));display:flex;align-items:center;justify-content:center}
+    .about .photo img{width:100%;height:100%;object-fit:cover}
+    .about .meta{flex:1}
+    .meta h3{margin:0 0 8px 0}
+    .meta p{margin:6px 0;color:var(--muted)}
+
+    /* Sections */
+    .section{margin-top:14px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+    .service{padding:12px;border-radius:12px;background:linear-gradient(180deg,var(--glass),transparent);}
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .project{border-radius:10px;padding:12px}
+
+    /* Reviews & comments */
+    .review{padding:12px;border-radius:10px;margin-bottom:10px}
+    .comment-form textarea{width:100%;min-height:80px;border-radius:8px;padding:10px;border:1px solid #ddd}
+
+  /* Social icon brand colors */
+  .socials a[aria-label="Instagram"] i { color: #E4405F; }
+  .socials a[aria-label="Facebook"] i { color: #1877F3; }
+  .socials a[aria-label="Twitter"] i { color: #1DA1F2; }
+
+    /* Footer */
+    footer{margin-top:22px;text-align:center;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr;}
+      .brand h1{font-size:16px}
+      .about{flex-direction:column;align-items:flex-start}
+      .about .photo{width:140px;height:140px}
+    }
+
+      /* Tablet breakpoint */
+      @media (max-width:768px){
+        .container{padding:10px;}
+        header{flex-direction:column;align-items:flex-start;gap:8px;}
+        .controls{flex-direction:column;align-items:stretch;gap:6px;}
+        nav{flex-wrap:wrap;gap:2px;justify-content:flex-start;}
+        nav a{font-size:15px;padding:7px 8px;}
+        .brand{gap:8px;}
+        .logo{width:44px;height:44px;font-size:18px;}
+        .brand h1{font-size:14px;}
+        .grid{gap:12px;margin-top:10px;}
+        .card{padding:12px;}
+        .hero{flex-direction:column;gap:10px;}
+        .hero h2{font-size:18px;}
+        .about .photo{width:110px;height:110px;}
+        .meta h3{font-size:15px;}
+        .section{margin-top:8px;}
+        .cards{gap:8px;}
+        .service{padding:10px;font-size:14px;}
+        .projects{gap:8px;}
+        .project{padding:8px;}
+        aside{margin-top:8px;}
+        footer{margin-top:10px;font-size:12px;}
+        .btn{padding:8px 10px;font-size:14px;}
+        .outline{font-size:14px;}
+        .socials a{width:34px;height:34px;}
+        .comment-form textarea{min-height:50px;padding:7px;font-size:13px;}
+      }
+
+      /* Mobile breakpoint */
+      @media (max-width:480px){
+        .container{padding:4px;}
+        header{flex-direction:column;align-items:flex-start;gap:6px;}
+        .controls{flex-direction:column;align-items:stretch;gap:4px;}
+        nav{flex-wrap:wrap;gap:1px;justify-content:flex-start;}
+        nav a{font-size:13px;padding:6px 6px;}
+        .brand{gap:6px;}
+        .logo{width:32px;height:32px;font-size:15px;}
+        .brand h1{font-size:12px;}
+        .grid{gap:6px;margin-top:6px;}
+        .card{padding:7px;}
+        .hero{flex-direction:column;gap:6px;}
+        .hero h2{font-size:15px;}
+        .about .photo{width:70px;height:70px;}
+        .meta h3{font-size:13px;}
+        .section{margin-top:4px;}
+        .cards{gap:4px;}
+        .service{padding:6px;font-size:12px;}
+        .projects{gap:4px;}
+        .project{padding:5px;}
+        aside{margin-top:4px;}
+        footer{margin-top:6px;font-size:10px;}
+        .btn{padding:6px 7px;font-size:12px;}
+        .outline{font-size:12px;}
+        .socials a{width:28px;height:28px;}
+        .comment-form textarea{min-height:30px;padding:5px;font-size:11px;}
+      }
+
+    /* Tab container */
+    .tabs{margin-top:12px}
+    .tabs > div{display:none}
+    .tabs > div.active{display:block}
+
+    /* subtle animated accent */
+    .shine{position:relative;overflow:hidden}
+    .shine::after{content:'';position:absolute;left:-120%;top:0;bottom:0;width:120%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);transform:skewX(-10deg);animation:shimmer 6s linear infinite}
+    @keyframes shimmer{0%{left:-120%}50%{left:120%}100%{left:-120%}}
+  </style>
+</head>
+<body>
+  <div class="container" id="page">
+    <header>
+      <div class="brand">
+        <div class="logo">DO</div>
+        <img src="love.jpg" alt="do">
+        <div>
+          <h1>Divine Osadebe</h1>
+          <div style="font-size:12px;color:var(--muted)">Frontend developer • 5 years experience</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <nav id="nav">
+          <a href="#home" data-tab="home" class="active">Home</a>
+          <a href="#about" data-tab="about">About</a>
+          <a href="#projects" data-tab="projects">Projects</a>
+          <a href="#services" data-tab="services">Services</a>
+          <a href="#achievements" data-tab="achievements">Achievements</a>
+          <a href="#reviews" data-tab="reviews">Reviews</a>
+          <a href="#comments" data-tab="comments">Comments</a>
+          <a href="#contact" data-tab="contact">Contact</a>
+        </nav>
+
+        <button class="btn outline" id="themeToggle" title="Toggle dark/light">🌙</button>
+        <button class="btn" id="hireBtn">Hire Me</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section>
+        <!-- Tabs container -->
+        <div class="tabs card">
+          <!-- HOME -->
+          <div id="home" class="active">
+            <div class="hero">
+              <div class="intro">
+                <h2 class="shine">Hi — I'm Divine Osadebe</h2>
+                <p>A passionate Front-End Developer who builds beautiful, accessible and fast web interfaces. I focus on modern responsive UI, performance and delightful experiences.</p>
+
+                <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+                  <a class="btn" href="#projects">View Projects</a>
+                  <a class="btn outline" id="cvBtn">Download CV / QR</a>
+                </div>
+
+                <div style="margin-top:14px" class="socials">
+                  <a href="https://instagram.com/jordanosadebe" target="_blank" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+                  <a href="https://facebook.com/jordanosadebe" target="_blank" aria-label="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
+                  <a href="https://twitter.com/jordanosadebe" target="_blank" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+                </div>
+
+              </div>
+              <div style="width:220px;text-align:center">
+                <div style="background:linear-gradient(135deg,var(--accent),#2fb4ff);padding:12px;border-radius:12px;color:white">
+                  <div style="font-weight:800;font-size:28px">DO</div>
+                  <div style="font-size:12px;margin-top:6px">Front-End Developer</div>
+                </div>
+                <div style="margin-top:12px;color:var(--muted);font-size:13px">Email: jordanosadebe@gmail.com<br>Phone: 08101176992</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ABOUT -->
+          <div id="about">
+            <div class="about">
+              <div class="photo card">
+                <!-- user picture area; replace src with actual photo -->
+                <img src="https://via.placeholder.com/400x400.png?text=Your+Photo+Here" alt="Divine Osadebe">
+              </div>
+              <div class="meta">
+                <h3>About — Divine Osadebe</h3>
+                <p><strong>My name is Divine Osadebe, I am a front end developer with 5 years of work experience.</strong></p>
+                <p>I build pixel-perfect, responsive and accessible front-end applications using modern technologies (HTML, CSS, JavaScript, React). I love turning complex problems into simple, beautiful and intuitive designs.</p>
+
+                <div style="margin-top:8px">
+                  <strong>Contact</strong>
+                  <div style="font-size:14px;color:var(--muted)">Email: <a href="mailto:jordanosadebe@gmail.com">jordanosadebe@gmail.com</a> • Phone: <a href="tel:+2348101176992">08101176992</a></div>
+                </div>
+
+                <div style="margin-top:12px;display:flex;gap:8px">
+                  <button class="btn" id="hireBtn2">Hire Me</button>
+                  <button class="btn outline" id="downloadCv">Open CV</button>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="section">
+              <h4>Skills</h4>
+              <div class="cards">
+                <div class="service">HTML & CSS<br><small style="color:var(--muted)">Semantic markup, responsive layouts</small></div>
+                <div class="service">JavaScript & React<br><small style="color:var(--muted)">SPA, hooks, state management</small></div>
+                <div class="service">Accessibility & Performance<br><small style="color:var(--muted)">A11y, Lighthouse optimization</small></div>
+                <div class="service">Design Systems<br><small style="color:var(--muted)">Component-driven UIs</small></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- PROJECTS -->
+          <div id="projects">
+            <h3>Selected Projects</h3>
+            <div class="projects">
+              <div class="project card">
+                <h4>Portfolio Website</h4>
+                <p style="color:var(--muted)">Responsive portfolio with light/dark mode and contact integration.</p>
+                <small style="color:var(--muted)">HTML • CSS • JS</small>
+              </div>
+              <div class="project card">
+                <h4>E-commerce UI</h4>
+                <p style="color:var(--muted)">Checkout flow, product grid and animations.</p>
+                <small style="color:var(--muted)">React • Tailwind</small>
+              </div>
+              <div class="project card">
+                <h4>Dashboard App</h4>
+                <p style="color:var(--muted)">Data visualizations and reusable components.</p>
+                <small style="color:var(--muted)">React • Recharts</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- SERVICES -->
+          <div id="services">
+            <h3>Services</h3>
+            <div class="cards">
+              <div class="service card"><strong>Frontend Development</strong><div style="color:var(--muted)">Landing pages, SPAs, component libraries</div></div>
+              <div class="service card"><strong>UI/UX Design</strong><div style="color:var(--muted)">Figma to code, interaction design</div></div>
+              <div class="service card"><strong>Performance Audits</strong><div style="color:var(--muted)">Improve load times & accessibility</div></div>
+            </div>
+          </div>
+
+          <!-- ACHIEVEMENTS -->
+          <div id="achievements">
+            <h3>Achievements</h3>
+            <ul style="color:var(--muted)">
+              <li>Built high-traffic marketing pages that improved conversion by 18%.</li>
+              <li>Led UI rebuild for a SaaS product — reduced bundle size by 30%.</li>
+              <li>Mentored junior devs and ran frontend workshops.</li>
+            </ul>
+          </div>
+
+          <!-- REVIEWS -->
+          <div id="reviews">
+            <h3>Client Reviews</h3>
+            <div class="review card">
+              <strong>Ayomide A.</strong>
+              <p style="color:var(--muted)">"Divine is a reliable developer who delivered a fantastic UI on time."</p>
+            </div>
+            <div class="review card">
+              <strong>Sarah K.</strong>
+              <p style="color:var(--muted)">"Great communication and attention to detail."</p>
+            </div>
+          </div>
+
+          <!-- COMMENTS -->
+          <div id="comments">
+            <h3>Comments</h3>
+            <div class="card">
+              <form class="comment-form" onsubmit="return false;">
+                <label for="name">Name</label>
+                <input id="name" placeholder="Your name" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;margin-top:6px">
+                <label for="message" style="margin-top:8px;display:block">Message</label>
+                <textarea id="message" placeholder="Say hi..."></textarea>
+                <div style="margin-top:8px;display:flex;gap:8px">
+                  <button class="btn" onclick="postComment()">Post</button>
+                </div>
+              </form>
+              <div id="commentsList" style="margin-top:12px"></div>
+            </div>
+          </div>
+
+          <!-- CONTACT -->
+          <div id="contact">
+            <h3>Contact</h3>
+            <div class="card">
+              <p style="color:var(--muted)">Email: <a href="mailto:jordanosadebe@gmail.com">jordanosadebe@gmail.com</a></p>
+              <p style="color:var(--muted)">Phone: <a href="tel:+2348101176992">08101176992</a></p>
+              <p style="color:var(--muted)">Instagram / Facebook / Twitter: <a href="https://instagram.com/jordanosadebe">@jordanosadebe</a></p>
+
+              <form style="margin-top:12px" onsubmit="return false;">
+                <input placeholder="Your name" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;margin-bottom:8px">
+                <input placeholder="Your email" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;margin-bottom:8px">
+                <textarea placeholder="Message" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;margin-bottom:8px"></textarea>
+                <div style="display:flex;gap:8px"><button class="btn">Send Message</button><button class="btn outline" onclick="openCv()">Open CV</button></div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <footer>
+          <small>© <span id="year"></span> Divine Osadebe — Frontend Developer</small>
+        </footer>
+
+      </section>
+
+      <!-- Right column -->
+      <aside>
+        <div class="card">
+          <h4>Quick info</h4>
+          <p style="color:var(--muted)"><strong>Location:</strong> Nigeria</p>
+          <p style="color:var(--muted)"><strong>Experience:</strong> 5 years</p>
+          <p style="color:var(--muted)"><strong>Role:</strong> Front-End Developer</p>
+
+          <hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:12px 0">
+
+          <h4>Contact</h4>
+          <p style="color:var(--muted)">jordanosadebe@gmail.com<br>08101176992</p>
+
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn" onclick="document.querySelector('[data-tab=contact]').click()">Contact</button>
+            <button class="btn outline" id="qrShow">QR CV</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px;text-align:center">
+          <h4>Services Summary</h4>
+          <p style="color:var(--muted)">UI Development • Performance • Accessibility</p>
+        </div>
+
+      </aside>
+    </main>
+  </div>
+
+  <!-- QR Modal -->
+  <div id="qrModal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:60">
+    <div style="background:var(--card);padding:18px;border-radius:12px;max-width:360px;text-align:center">
+      <h3>Scan to open CV</h3>
+      <div id="qrContainer" style="margin:12px auto;width:200px;height:200px"></div>
+      <p style="color:var(--muted)">Or <a href="#" id="cvLink" target="_blank">open the CV</a></p>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:8px"><button class="btn" onclick="closeQr()">Close</button></div>
+    </div>
+  </div>
+
+  <script>
+    // initial values
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tabs logic
+    const nav = document.getElementById('nav');
+    nav.addEventListener('click', e=>{
+      if(e.target.matches('a[data-tab]')){
+        e.preventDefault();
+        const tab = e.target.dataset.tab;
+        document.querySelectorAll('#nav a').forEach(a=>a.classList.remove('active'));
+        e.target.classList.add('active');
+        document.querySelectorAll('.tabs > div').forEach(d=>d.classList.remove('active'));
+        const pane = document.getElementById(tab);
+        if(pane) pane.classList.add('active');
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+    });
+
+    // theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('site-theme');
+    if(saved) root.setAttribute('data-theme', saved);
+    themeToggle.addEventListener('click', ()=>{
+      const current = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', current === 'dark' ? 'dark' : 'light');
+      localStorage.setItem('site-theme', current === 'dark' ? 'dark' : 'light');
+      themeToggle.textContent = current === 'dark' ? '☀️' : '🌙';
+    });
+
+    // simple comment posting (client-side only)
+    function postComment(){
+      const name = document.getElementById('name').value || 'Anonymous';
+      const msg = document.getElementById('message').value || '';
+      if(!msg.trim()) return alert('Please type a message');
+      const div = document.createElement('div');
+      div.className = 'review card';
+      div.innerHTML = `<strong>${escapeHtml(name)}</strong><p style="color:var(--muted)">${escapeHtml(msg)}</p>`;
+      document.getElementById('commentsList').prepend(div);
+      document.getElementById('name').value = '';
+      document.getElementById('message').value = '';
+    }
+    function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // CV / QR handling
+    const cvUrl = 'https://example.com/Divine_Osadebe_CV.pdf'; 
+    function openCv(){ window.open(cvUrl,'_blank'); }
+    document.getElementById('downloadCv').addEventListener('click', openCv);
+    document.getElementById('cvBtn').addEventListener('click', ()=>{ showQr(); });
+    document.getElementById('qrShow').addEventListener('click', showQr);
+
+    function showQr(){
+      // use google chart api to generate a qr image for the CV url
+      const img = document.createElement('img');
+      const encoded = encodeURIComponent(cvUrl);
+      img.src = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encoded}`;
+      img.alt = 'QR code to CV';
+      const container = document.getElementById('qrContainer');
+      container.innerHTML = '';
+      container.appendChild(img);
+      document.getElementById('cvLink').href = cvUrl;
+      document.getElementById('qrModal').style.display = 'flex';
+    }
+    function closeQr(){ document.getElementById('qrModal').style.display = 'none'; }
+
+    // Hire me buttons
+    document.getElementById('hireBtn').addEventListener('click', ()=> document.querySelector('a[data-tab="contact"]').click());
+    document.getElementById('hireBtn2').addEventListener('click', ()=> document.querySelector('a[data-tab="contact"]').click());
+
+    // small accessibility improvements
+    document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeQr(); });
+
+    // initialize first tab
+    document.querySelectorAll('.tabs > div')[0].classList.add('active');
+
+  </script>
+      
+</body>
+</html>
